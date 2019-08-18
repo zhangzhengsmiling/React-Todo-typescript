@@ -1,0 +1,12 @@
+.app-container {
+  width: 100vw;
+  height: 100vh;
+  padding-top: 5vh;
+  background:gray;
+}
+
+.inner-box {
+  width: 80vw;
+  margin-left: 10vw;
+  /* background: red; */
+}
