@@ -1,5 +1,5 @@
 import React, { Component, KeyboardEvent, ChangeEvent } from 'react';
-import { Row, Col, Input, Button } from 'antd';
+import { Row, Col, Input, Button, message } from 'antd';
 import { connect } from 'react-redux';
 
 import { RootState } from '../../store';
@@ -13,11 +13,13 @@ interface IHeaderProps {
 
 interface IHeaderState {
   todoText:string;
+  isBtnLoading:boolean;
 }
 
 class Header extends Component<IHeaderProps, IHeaderState> {
   state = {
-    todoText: ''
+    todoText: '',
+    isBtnLoading: false
   }
 
   handleChange = (e:ChangeEvent<HTMLInputElement>) => {
@@ -25,21 +27,23 @@ class Header extends Component<IHeaderProps, IHeaderState> {
     this.setState({ todoText: value });
   }
 
-  handleAdd = () => {
+  handleAdd = async () => {
     const { todoText } = this.state;
     if(todoText.trim() === '') {
       return;
     }
-    this.props.addTodoAction({
+    this.setState({ isBtnLoading: true });
+    await this.props.addTodoAction({
       content: todoText,
       done: false
     });
-    this.setState({ todoText: '' })
+    this.setState({ isBtnLoading: false });
+    message.success('添加成功！');
+    this.setState({ todoText: '' });
   }
 
   handleKeyDown = (e:KeyboardEvent<HTMLInputElement>) => {
     if(e.keyCode === 13) {
-      console.log(e.keyCode);
       this.handleAdd();
     }
   }
@@ -51,7 +55,7 @@ class Header extends Component<IHeaderProps, IHeaderState> {
           <Input placeholder="please input todo：" value={this.state.todoText} onChange={(e) => this.handleChange(e)} onKeyDown={(e) => this.handleKeyDown(e)}></Input>
         </Col>
         <Col span={8}>
-          <Button disabled={this.state.todoText.trim() === ''} type={'primary'} style={{ marginLeft: '50%', transform: 'translateX(-50%)' }} onClick={() => this.handleAdd()}>添加</Button>
+          <Button disabled={this.state.todoText.trim() === ''} loading={this.state.isBtnLoading} type={'primary'} style={{ marginLeft: '50%', transform: 'translateX(-50%)' }} onClick={() => this.handleAdd()}>添加</Button>
         </Col>
       </Row>
     )

@@ -62,13 +62,14 @@ class List extends Component<IListProp> {
 }
 
 const mapStateToProps = (state:RootState) => ({
-  todoList: state.todoList,
+  todoList: state.todoList
 })
 
+const mapDispatchToProps = (dispatch:any) => ({
+  deleteTodoAction: (index:number) => dispatch(deleteTodoAction(index)),
+  changeTodoStatusAction: (index:number) => dispatch(changeTodoStatusAction(index)),  
+})
 export default connect(
   mapStateToProps,
-  {
-    deleteTodoAction,
-    changeTodoStatusAction
-  }
+  mapDispatchToProps
 )(List);
