@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { produce } from 'immer';
 
 export type ValueSetter<T> = (v: T) => any;
-type ImmerSetter<T> = (cb: ValueSetter<T>) => void;
+export type ImmerSetter<T> = (cb: ValueSetter<T>) => void;
 
 const useImmer = <T>(init: T): [T, ImmerSetter<T>] => {
   const [value, setValue] = useState<T>(init);
