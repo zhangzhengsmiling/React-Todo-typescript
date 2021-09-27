@@ -1,13 +1,13 @@
 import { RouteConfig } from 'react-router-config';
 import { CONSTANTS_ROUTES } from './constants';
 import { redirectTo } from './utils';
-import LayoutA from '../layouts/LayoutA';
-import LayoutB from '../layouts/LayoutB';
-import A from '../pages/A';
-import B from '../pages/B';
-import C from '../pages/C';
-import D from '../pages/D';
-import PageNotFound from '../components/PageNotFound';
+import LayoutA from '@/layouts/LayoutA';
+import LayoutB from '@/layouts/LayoutB';
+import A from '@/pages/A';
+import B from '@/pages/B';
+import C from '@/pages/C';
+import D from '@/pages/D';
+import PageNotFound from '@/components/PageNotFound';
 
 const routes: RouteConfig[] = [
   {
