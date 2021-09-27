@@ -1,13 +1,15 @@
 import { RouteConfig } from 'react-router-config';
 import { CONSTANTS_ROUTES } from './constants';
+import asyncImportComponent from '@/utils/async-import-component';
 import { redirectTo } from './utils';
 import LayoutA from '@/layouts/LayoutA';
 import LayoutB from '@/layouts/LayoutB';
-import A from '@/pages/A';
-import B from '@/pages/B';
-import C from '@/pages/C';
-import D from '@/pages/D';
 import PageNotFound from '@/components/PageNotFound';
+
+const A = asyncImportComponent(() => import('@/pages/A'));
+const B = asyncImportComponent(() => import('@/pages/B'));
+const C = asyncImportComponent(() => import('@/pages/C'));
+const D = asyncImportComponent(() => import('@/pages/D'));
 
 const routes: RouteConfig[] = [
   {
@@ -32,14 +34,6 @@ const routes: RouteConfig[] = [
         path: CONSTANTS_ROUTES.PAGE_B,
         component: B,
       },
-      // {
-      //   path: CONSTANTS_ROUTES.PAGE_C,
-      //   component: C
-      // },
-      // {
-      //   path: CONSTANTS_ROUTES.PAGE_D,
-      //   component: D
-      // },
       {
         path: '*',
         component: PageNotFound,
