@@ -6,14 +6,18 @@ import DynamicRouter from './router';
 
 import { Provider } from 'react-redux';
 import { configStore } from './store';
+import { Provider as MobxProvider } from 'mobx-react';
+import StateUser from '@/pages/B/mobx';
 
 const store = configStore();
 
 const Root = () => {
   return (
-    <Provider store={store}>
-      <DynamicRouter />
-    </Provider>
+    <MobxProvider store={new StateUser()}>
+      <Provider store={store}>
+        <DynamicRouter />
+      </Provider>
+    </MobxProvider>
   )
 }
 
